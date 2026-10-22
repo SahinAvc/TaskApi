@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ayarlar — TaskApi</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body data-page="settings">
+
+    <aside class="sidebar" aria-label="Ana menü">
+        <div class="logo">Task<span>Api</span></div>
+        <nav class="sidebar-nav">
+            <a href="index.html" class="nav-link" data-nav="tasks"><span aria-hidden="true">▦</span> Görevler</a>
+            <a href="calendar.html" class="nav-link" data-nav="calendar"><span aria-hidden="true">◷</span> Takvim</a>
+            <a href="stats.html" class="nav-link" data-nav="stats"><span aria-hidden="true">▥</span> İstatistikler</a>
+            <a href="settings.html" class="nav-link" data-nav="settings"><span aria-hidden="true">⚙</span> Ayarlar</a>
+        </nav>
+        <div class="sidebar-bottom">
+            <a href="#" class="nav-link logout" id="logout-btn"><span aria-hidden="true">↪</span> Çıkış Yap</a>
+        </div>
+    </aside>
+
+    <main class="main-content">
+        <header class="topbar">
+            <div>
+                <p id="welcome-message" class="welcome-line">Hoş geldin 👋</p>
+                <h1>Ayarlar</h1>
+            </div>
+            <div class="topbar-actions">
+                <button type="button" class="mobile-logout-btn" id="mobile-logout-btn">Çıkış</button>
+            </div>
+        </header>
+
+        <section class="settings-stack">
+            <article class="panel-card settings-card">
+                <h2>Hesap</h2>
+                <dl class="settings-dl">
+                    <dt>Kullanıcı adı</dt>
+                    <dd id="settings-username">—</dd>
+                </dl>
+                <p class="muted-text">Profil bilgileri sunucudaki oturumundan alınır.</p>
+                <button type="button" class="danger-btn" id="settings-logout">Çıkış yap</button>
+            </article>
+
+            <article class="panel-card settings-card settings-card--soon">
+                <h2>Bildirimler</h2>
+                <p class="soon-badge">Yakında</p>
+                <p class="muted-text">Son tarih hatırlatmaları ve e-posta bildirimleri bir sonraki sürümde eklenecek.</p>
+            </article>
+
+            <article class="panel-card settings-card settings-card--soon">
+                <h2>Görünüm</h2>
+                <p class="soon-badge">Yakında</p>
+                <p class="muted-text">Tema seçenekleri ve yazı boyutu ayarları üzerinde çalışılıyor.</p>
+            </article>
+        </section>
+    </main>
+
+    <div id="toast-container" class="toast-container" aria-live="polite"></div>
+
+    <script src="js/api.js"></script>
+    <script src="js/shared.js"></script>
+    <script src="js/settings.js"></script>
+</body>
+</html>

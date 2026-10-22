@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Takvim — TaskApi</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body data-page="calendar">
+
+    <aside class="sidebar" aria-label="Ana menü">
+        <div class="logo">Task<span>Api</span></div>
+        <nav class="sidebar-nav">
+            <a href="index.html" class="nav-link" data-nav="tasks"><span aria-hidden="true">▦</span> Görevler</a>
+            <a href="calendar.html" class="nav-link" data-nav="calendar"><span aria-hidden="true">◷</span> Takvim</a>
+            <a href="stats.html" class="nav-link" data-nav="stats"><span aria-hidden="true">▥</span> İstatistikler</a>
+            <a href="settings.html" class="nav-link" data-nav="settings"><span aria-hidden="true">⚙</span> Ayarlar</a>
+        </nav>
+        <div class="sidebar-bottom">
+            <a href="#" class="nav-link logout" id="logout-btn"><span aria-hidden="true">↪</span> Çıkış Yap</a>
+        </div>
+    </aside>
+
+    <main class="main-content">
+        <header class="topbar">
+            <div>
+                <p id="welcome-message" class="welcome-line">Hoş geldin 👋</p>
+                <h1>Takvim</h1>
+            </div>
+            <div class="topbar-actions">
+                <button type="button" class="mobile-logout-btn" id="mobile-logout-btn">Çıkış</button>
+            </div>
+        </header>
+
+        <div id="calendar-status" class="page-status" aria-live="polite"></div>
+
+        <section class="calendar-layout">
+            <div class="panel-card">
+                <div class="calendar-toolbar">
+                    <button type="button" class="ghost-btn" id="calendar-prev" aria-label="Önceki ay">←</button>
+                    <h2 id="calendar-month-label">—</h2>
+                    <button type="button" class="ghost-btn" id="calendar-next" aria-label="Sonraki ay">→</button>
+                </div>
+                <button type="button" class="text-btn" id="calendar-today">Bugüne git</button>
+                <div id="calendar-grid" class="calendar-grid" role="grid" aria-label="Aylık takvim"></div>
+            </div>
+
+            <aside class="panel-card" id="calendar-day-detail" aria-live="polite">
+                <h2>Gün detayı</h2>
+                <p class="muted-text">Son tarihli görevleri görmek için takvimden bir gün seç.</p>
+            </aside>
+        </section>
+    </main>
+
+    <div id="toast-container" class="toast-container" aria-live="polite"></div>
+
+    <script src="js/api.js"></script>
+    <script src="js/shared.js"></script>
+    <script src="js/calendar.js"></script>
+</body>
+</html>

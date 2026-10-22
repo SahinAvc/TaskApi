@@ -1,0 +1,1570 @@
+/* =========================
+   TEMEL AYARLAR
+========================= */
+
+:root {
+    --bg-color: #0f1117;
+    --sidebar-color: #151821;
+    --card-color: #1b1f2a;
+    --card-hover: #222735;
+
+    --text-color: #f5f7fa;
+    --muted-text: #8d95a5;
+
+    --border-color: #292e3b;
+
+    --primary-color: #6c63ff;
+    --primary-hover: #7b73ff;
+
+    --todo-color: #4f8cff;
+    --doing-color: #f5a623;
+    --done-color: #38c793;
+}
+
+
+/* =========================
+   RESET
+========================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    min-height: 100vh;
+}
+
+
+/* =========================
+   SIDEBAR
+========================= */
+
+.sidebar {
+    position: fixed;
+    left: 0;
+    top: 0;
+
+    width: 240px;
+    height: 100vh;
+
+    background-color: var(--sidebar-color);
+    border-right: 1px solid var(--border-color);
+
+    display: flex;
+    flex-direction: column;
+
+    padding: 28px 18px;
+}
+
+
+/* LOGO */
+
+.logo {
+    font-size: 25px;
+    font-weight: 700;
+
+    padding: 0 12px;
+    margin-bottom: 45px;
+}
+
+.logo span {
+    color: var(--primary-color);
+}
+
+
+/* NAV */
+
+.sidebar-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.nav-link {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    padding: 12px 14px;
+
+    color: var(--muted-text);
+    text-decoration: none;
+
+    border-radius: 10px;
+
+    transition: 0.2s;
+}
+
+.nav-link:hover {
+    background-color: var(--card-color);
+    color: var(--text-color);
+}
+
+.nav-link.active {
+    background-color: rgba(108, 99, 255, 0.15);
+    color: var(--primary-color);
+}
+
+.nav-link span {
+    width: 20px;
+    text-align: center;
+}
+
+
+/* SIDEBAR ALT */
+
+.sidebar-bottom {
+    margin-top: auto;
+
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.logout:hover {
+    color: #ff6b6b;
+}
+
+
+/* =========================
+   ANA ALAN
+========================= */
+
+.main-content {
+    margin-left: 240px;
+
+    min-height: 100vh;
+
+    padding: 40px;
+}
+
+
+/* =========================
+   ÜST KISIM
+========================= */
+
+.topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
+
+    margin-bottom: 35px;
+}
+
+.topbar-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.mobile-logout-btn {
+    display: none;
+    border: 1px solid var(--border-color);
+    background: transparent;
+    color: var(--muted-text);
+    padding: 10px 14px;
+    border-radius: 10px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.mobile-logout-btn:hover,
+.mobile-logout-btn:focus-visible {
+    color: #ff6b6b;
+    border-color: rgba(255, 107, 107, 0.45);
+    outline: none;
+}
+
+.welcome-text {
+    color: var(--muted-text);
+    font-size: 14px;
+
+    margin-bottom: 6px;
+}
+
+.topbar h1 {
+    font-size: 30px;
+}
+
+
+/* YENİ GÖREV BUTONU */
+
+.new-task-btn {
+    border: none;
+
+    background-color: var(--primary-color);
+    color: white;
+
+    padding: 12px 18px;
+
+    border-radius: 10px;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+.new-task-btn:hover {
+    background-color: var(--primary-hover);
+    transform: translateY(-1px);
+}
+
+.new-task-btn span {
+    font-size: 18px;
+    margin-right: 5px;
+}
+
+
+/* =========================
+   KANBAN
+========================= */
+
+.board {
+    display: grid;
+
+    grid-template-columns: repeat(3, 1fr);
+
+    gap: 20px;
+
+    align-items: start;
+}
+
+
+/* =========================
+   KOLON
+========================= */
+
+.column {
+    background-color: var(--sidebar-color);
+
+    border: 1px solid var(--border-color);
+
+    border-radius: 14px;
+
+    padding: 18px;
+
+    min-height: 500px;
+}
+
+
+/* KOLON BAŞLIĞI */
+
+.column-header {
+    margin-bottom: 20px;
+}
+
+.column-header > div {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.column-header h2 {
+    font-size: 16px;
+}
+
+
+/* GÖREV SAYISI */
+
+.task-count {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    min-width: 25px;
+    height: 25px;
+
+    padding: 0 7px;
+
+    background-color: var(--card-color);
+
+    border-radius: 20px;
+
+    color: var(--muted-text);
+
+    font-size: 12px;
+}
+
+
+/* =========================
+   GÖREV LİSTESİ
+========================= */
+
+.task-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (min-width: 601px) and (max-width: 1100px) {
+    .board {
+        grid-template-columns: repeat(3, minmax(260px, 1fr));
+        overflow-x: auto;
+        padding-bottom: 8px;
+    }
+}
+
+@media (max-width: 900px) {
+
+    .sidebar {
+        width: 200px;
+    }
+
+    .main-content {
+        margin-left: 200px;
+        padding: 25px;
+    }
+
+    .board {
+        grid-template-columns: 1fr;
+    }
+
+    .column {
+        min-height: 250px;
+    }
+
+    .calendar-layout {
+        grid-template-columns: 1fr;
+    }
+}
+
+
+@media (max-width: 600px) {
+
+    .sidebar {
+        position: fixed;
+
+        width: 100%;
+        height: 65px;
+
+        bottom: 0;
+        top: auto;
+
+        border-right: none;
+        border-top: 1px solid var(--border-color);
+
+        padding: 8px 10px;
+
+        z-index: 100;
+    }
+
+    .logo {
+        display: none;
+    }
+
+    .sidebar-nav {
+        flex-direction: row;
+        justify-content: space-between;
+        gap: 4px;
+        overflow-x: auto;
+        width: 100%;
+    }
+
+    .sidebar-bottom {
+        display: none;
+    }
+
+    .nav-link {
+        flex-direction: column;
+        gap: 3px;
+        flex: 1;
+        min-width: 62px;
+        padding: 6px 4px;
+        font-size: 10px;
+        text-align: center;
+    }
+
+    .nav-link span {
+        width: auto;
+    }
+
+    .main-content {
+        margin-left: 0;
+
+        padding: 25px 15px 90px;
+    }
+
+    .topbar {
+        align-items: flex-start;
+    }
+
+    .topbar h1 {
+        font-size: 24px;
+    }
+
+    .new-task-btn {
+        padding: 10px 12px;
+    }
+
+    .new-task-btn span {
+        margin-right: 0;
+    }
+
+    .new-task-btn {
+        font-size: 0;
+    }
+
+    .new-task-btn span {
+        font-size: 22px;
+    }
+
+    .mobile-logout-btn {
+        display: inline-block;
+    }
+
+    .toast-container {
+        left: 15px;
+        right: 15px;
+        bottom: 80px;
+        max-width: none;
+    }
+}
+
+/* =========================
+   GÖREV KARTLARI
+========================= */
+
+.task-card {
+    background-color: var(--card-color);
+
+    border: 1px solid var(--border-color);
+
+    border-radius: 12px;
+
+    padding: 15px;
+
+    transition: 0.2s;
+}
+
+.task-card:hover {
+    background-color: var(--card-hover);
+
+    transform: translateY(-2px);
+}
+
+
+/* ÜST KISIM */
+
+.task-card-top {
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    margin-bottom: 12px;
+}
+
+
+/* ÖNCELİK */
+
+.priority {
+    display: inline-block;
+
+    padding: 4px 8px;
+
+    border-radius: 6px;
+
+    font-size: 11px;
+
+    font-weight: 600;
+}
+
+.priority.low {
+    background-color: rgba(56, 199, 147, 0.12);
+
+    color: var(--done-color);
+}
+
+.priority.medium {
+    background-color: rgba(245, 166, 35, 0.12);
+
+    color: var(--doing-color);
+}
+
+.priority.high {
+    background-color: rgba(255, 107, 107, 0.12);
+
+    color: #ff6b6b;
+}
+
+
+/* SİL BUTONU */
+
+.task-menu {
+    border: none;
+
+    background: none;
+
+    color: var(--muted-text);
+
+    font-size: 20px;
+
+    cursor: pointer;
+
+    line-height: 1;
+}
+
+.task-menu:hover {
+    color: #ff6b6b;
+}
+
+
+/* BAŞLIK */
+
+.task-card h3 {
+    font-size: 15px;
+
+    margin-bottom: 7px;
+
+    line-height: 1.4;
+}
+
+
+/* AÇIKLAMA */
+
+.task-card p {
+    color: var(--muted-text);
+
+    font-size: 13px;
+
+    line-height: 1.5;
+
+    margin-bottom: 15px;
+}
+
+
+/* ALT KISIM */
+
+.task-card-bottom {
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    padding-top: 12px;
+
+    border-top: 1px solid var(--border-color);
+}
+
+
+.task-date {
+    color: var(--muted-text);
+
+    font-size: 11px;
+}
+
+.task-date--overdue {
+    color: #ff8a8a;
+    font-weight: 600;
+}
+
+.column-empty {
+    color: var(--muted-text);
+    font-size: 13px;
+    text-align: center;
+    padding: 28px 12px;
+    border: 1px dashed var(--border-color);
+    border-radius: 10px;
+}
+
+.board-status {
+    margin-bottom: 18px;
+    min-height: 0;
+}
+
+.board-status--loading .board-loading-text,
+.board-status--error p {
+    color: var(--muted-text);
+    font-size: 14px;
+}
+
+.board-status--error {
+    background: rgba(255, 107, 107, 0.08);
+    border: 1px solid rgba(255, 107, 107, 0.25);
+    border-radius: 12px;
+    padding: 14px 16px;
+}
+
+.board-status--error p {
+    color: #ffb4b4;
+    margin-bottom: 10px;
+}
+
+.retry-btn {
+    border: none;
+    background: var(--primary-color);
+    color: white;
+    padding: 8px 14px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.retry-btn:hover {
+    background: var(--primary-hover);
+}
+
+.board--loading {
+    opacity: 0.55;
+    pointer-events: none;
+}
+
+.toast-container {
+    position: fixed;
+    right: 20px;
+    bottom: 24px;
+    z-index: 2000;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-width: min(360px, calc(100vw - 40px));
+}
+
+.toast {
+    background: var(--card-color);
+    border: 1px solid var(--border-color);
+    border-left: 4px solid var(--done-color);
+    color: var(--text-color);
+    padding: 12px 14px;
+    border-radius: 10px;
+    font-size: 14px;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
+    transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+.toast--error {
+    border-left-color: #ff6b6b;
+}
+
+.toast--hide {
+    opacity: 0;
+    transform: translateY(6px);
+}
+
+.save-task-btn:disabled,
+.auth-button:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+
+.nav-link:focus-visible,
+.new-task-btn:focus-visible,
+.task-actions button:focus-visible,
+.task-menu:focus-visible,
+.modal-close:focus-visible,
+.cancel-btn:focus-visible,
+.save-task-btn:focus-visible,
+.auth-button:focus-visible {
+    outline: 2px solid var(--primary-color);
+    outline-offset: 2px;
+}
+
+
+/* DURUM BUTONLARI */
+
+.task-actions {
+    display: flex;
+
+    gap: 5px;
+}
+
+
+.task-actions button {
+    width: 27px;
+
+    height: 27px;
+
+    border: 1px solid var(--border-color);
+
+    background-color: var(--sidebar-color);
+
+    color: var(--muted-text);
+
+    border-radius: 6px;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+
+.task-actions button:hover {
+    background-color: var(--primary-color);
+
+    color: white;
+
+    border-color: var(--primary-color);
+}
+
+/* =========================
+   LOGIN
+========================= */
+
+.auth-page {
+    min-height: 100vh;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 20px;
+}
+
+
+.auth-container {
+    width: 100%;
+
+    max-width: 420px;
+}
+
+
+.auth-card {
+    background-color: var(--sidebar-color);
+
+    border: 1px solid var(--border-color);
+
+    border-radius: 18px;
+
+    padding: 40px;
+
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25);
+}
+
+
+.auth-logo {
+    font-size: 26px;
+
+    font-weight: 700;
+
+    margin-bottom: 30px;
+}
+
+.auth-logo span {
+    color: var(--primary-color);
+}
+
+
+.auth-card h1 {
+    font-size: 25px;
+
+    margin-bottom: 8px;
+}
+
+
+.auth-description {
+    color: var(--muted-text);
+
+    font-size: 14px;
+
+    margin-bottom: 30px;
+}
+
+
+/* FORM */
+
+.form-group {
+    margin-bottom: 18px;
+}
+
+
+.form-group label {
+    display: block;
+
+    font-size: 13px;
+
+    margin-bottom: 7px;
+}
+
+
+.form-group input {
+    width: 100%;
+
+    padding: 12px 14px;
+
+    background-color: var(--bg-color);
+
+    border: 1px solid var(--border-color);
+
+    border-radius: 9px;
+
+    color: var(--text-color);
+
+    outline: none;
+
+    font-size: 14px;
+}
+
+
+.form-group input:focus {
+    border-color: var(--primary-color);
+}
+
+
+/* HATA */
+
+.form-error {
+    color: #ff6b6b;
+
+    font-size: 13px;
+
+    min-height: 18px;
+
+    margin-bottom: 10px;
+}
+
+
+/* BUTON */
+
+.auth-button {
+    width: 100%;
+
+    border: none;
+
+    background-color: var(--primary-color);
+
+    color: white;
+
+    padding: 13px;
+
+    border-radius: 9px;
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+
+.auth-button:hover {
+    background-color: var(--primary-hover);
+}
+
+
+/* ALT */
+
+.auth-footer {
+    text-align: center;
+
+    color: var(--muted-text);
+
+    font-size: 13px;
+
+    margin-top: 25px;
+}
+
+
+.auth-footer a {
+    color: var(--primary-color);
+
+    text-decoration: none;
+}
+
+/* =========================
+   TASK MODAL
+========================= */
+
+.modal-overlay {
+    position: fixed;
+
+    inset: 0;
+
+    background: rgba(0, 0, 0, 0.65);
+
+    display: none;
+
+    align-items: center;
+    justify-content: center;
+
+    padding: 20px;
+
+    z-index: 1000;
+
+    backdrop-filter: blur(5px);
+}
+
+
+.modal-overlay.active {
+    display: flex;
+}
+
+
+.task-modal {
+    width: 100%;
+    max-width: 520px;
+
+    background-color: var(--sidebar-color);
+
+    border: 1px solid var(--border-color);
+
+    border-radius: 18px;
+
+    padding: 28px;
+
+    box-shadow: 0 25px 70px rgba(0, 0, 0, 0.4);
+
+    animation: modalOpen 0.2s ease;
+}
+
+
+@keyframes modalOpen {
+
+    from {
+        opacity: 0;
+        transform: translateY(10px) scale(0.98);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+
+}
+
+
+/* MODAL HEADER */
+
+.modal-header {
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: flex-start;
+
+    margin-bottom: 28px;
+}
+
+
+.modal-label {
+    color: var(--primary-color);
+
+    font-size: 10px;
+
+    font-weight: 700;
+
+    letter-spacing: 1.5px;
+
+    margin-bottom: 5px;
+}
+
+
+.modal-header h2 {
+    font-size: 22px;
+}
+
+
+.modal-close {
+    width: 32px;
+    height: 32px;
+
+    border: none;
+
+    background: var(--card-color);
+
+    color: var(--muted-text);
+
+    border-radius: 8px;
+
+    font-size: 22px;
+
+    cursor: pointer;
+}
+
+
+.modal-close:hover {
+    color: white;
+}
+
+
+/* TEXTAREA */
+
+.form-group textarea,
+.form-group select {
+    width: 100%;
+
+    padding: 12px 14px;
+
+    background-color: var(--bg-color);
+
+    border: 1px solid var(--border-color);
+
+    border-radius: 9px;
+
+    color: var(--text-color);
+
+    outline: none;
+
+    font-family: inherit;
+
+    font-size: 14px;
+
+    resize: vertical;
+}
+
+
+.form-group textarea:focus,
+.form-group select:focus {
+    border-color: var(--primary-color);
+}
+
+
+/* SELECT */
+
+.form-group select {
+    cursor: pointer;
+}
+
+
+/* FORM ROW */
+
+.form-row {
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 15px;
+}
+
+
+/* DATE */
+
+input[type="date"] {
+    color-scheme: dark;
+}
+
+
+/* MODAL BUTTONS */
+
+.modal-actions {
+    display: flex;
+
+    justify-content: flex-end;
+
+    gap: 10px;
+
+    margin-top: 10px;
+}
+
+
+.cancel-btn,
+.save-task-btn {
+    padding: 11px 18px;
+
+    border-radius: 9px;
+
+    font-size: 13px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+
+.cancel-btn {
+    border: 1px solid var(--border-color);
+
+    background: transparent;
+
+    color: var(--muted-text);
+}
+
+
+.cancel-btn:hover {
+    background: var(--card-color);
+
+    color: white;
+}
+
+
+.save-task-btn {
+    border: none;
+
+    background: var(--primary-color);
+
+    color: white;
+}
+
+
+.save-task-btn:hover {
+    background: var(--primary-hover);
+}
+
+
+/* MOBİL */
+
+@media (max-width: 600px) {
+
+    .task-modal {
+        padding: 22px;
+
+        border-radius: 15px;
+    }
+
+    .form-row {
+        grid-template-columns: 1fr;
+        gap: 0;
+    }
+
+    .modal-actions {
+        flex-direction: column-reverse;
+    }
+
+    .cancel-btn,
+    .save-task-btn {
+        width: 100%;
+    }
+
+    .task-card-hint {
+        display: none;
+    }
+
+}
+
+/* =========================
+   ORTAK SAYFA BİLEŞENLERİ
+========================= */
+
+.welcome-line {
+    color: var(--muted-text);
+    font-size: 14px;
+    margin-bottom: 6px;
+}
+
+.muted-text {
+    color: var(--muted-text);
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.page-status {
+    margin-bottom: 18px;
+}
+
+.page-status--loading .page-loading-text {
+    color: var(--muted-text);
+    font-size: 14px;
+}
+
+.page-status--error {
+    background: rgba(255, 107, 107, 0.08);
+    border: 1px solid rgba(255, 107, 107, 0.25);
+    border-radius: 12px;
+    padding: 14px 16px;
+}
+
+.page-status--error p {
+    color: #ffb4b4;
+    margin-bottom: 10px;
+}
+
+.field-error {
+    color: #ff8a8a;
+    font-size: 12px;
+    min-height: 16px;
+    margin-top: 6px;
+}
+
+.input-invalid {
+    border-color: #ff6b6b !important;
+}
+
+.panel-card {
+    background: var(--sidebar-color);
+    border: 1px solid var(--border-color);
+    border-radius: 14px;
+    padding: 20px;
+}
+
+.text-link {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.text-link:hover {
+    text-decoration: underline;
+}
+
+.ghost-btn,
+.text-btn,
+.danger-btn {
+    border-radius: 9px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.ghost-btn {
+    border: 1px solid var(--border-color);
+    background: var(--card-color);
+    color: var(--text-color);
+    width: 36px;
+    height: 36px;
+}
+
+.text-btn {
+    border: none;
+    background: transparent;
+    color: var(--primary-color);
+    margin: 8px 0 14px;
+    padding: 0;
+}
+
+.danger-btn {
+    margin-top: 14px;
+    border: 1px solid rgba(255, 107, 107, 0.45);
+    background: rgba(255, 107, 107, 0.12);
+    color: #ffb4b4;
+    padding: 10px 14px;
+}
+
+/* =========================
+   GÖREV KARTI — DURUM / SÜRÜKLE
+========================= */
+
+.task-card-actions-top {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.task-edit-btn {
+    border: 1px solid var(--border-color);
+    background: transparent;
+    color: var(--muted-text);
+    border-radius: 6px;
+    font-size: 11px;
+    padding: 4px 8px;
+    cursor: pointer;
+}
+
+.task-edit-btn:hover {
+    color: var(--text-color);
+    border-color: var(--primary-color);
+}
+
+.status-move {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 12px;
+}
+
+.status-btn {
+    border: 1px solid var(--border-color);
+    background: var(--sidebar-color);
+    color: var(--text-color);
+    border-radius: 8px;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 6px 10px;
+    cursor: pointer;
+    min-height: 32px;
+}
+
+.status-btn--todo:hover,
+.status-btn--todo:focus-visible {
+    border-color: var(--todo-color);
+    color: var(--todo-color);
+}
+
+.status-btn--doing:hover,
+.status-btn--doing:focus-visible {
+    border-color: var(--doing-color);
+    color: var(--doing-color);
+}
+
+.status-btn--done:hover,
+.status-btn--done:focus-visible {
+    border-color: var(--done-color);
+    color: var(--done-color);
+}
+
+.status-btn--loading {
+    opacity: 0.6;
+    pointer-events: none;
+}
+
+.task-card--busy {
+    opacity: 0.65;
+    pointer-events: none;
+}
+
+.task-card--dragging {
+    opacity: 0.45;
+}
+
+.task-list--drop-target {
+    outline: 2px dashed var(--primary-color);
+    outline-offset: 4px;
+    border-radius: 10px;
+    min-height: 80px;
+}
+
+.task-card-hint {
+    margin-top: 10px;
+    font-size: 11px;
+    color: var(--muted-text);
+}
+
+.task-modal {
+    max-height: calc(100vh - 40px);
+    overflow-y: auto;
+}
+
+/* =========================
+   TAKVİM
+========================= */
+
+.calendar-layout {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 20px;
+    align-items: start;
+}
+
+.calendar-toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 6px;
+}
+
+.calendar-toolbar h2 {
+    font-size: 20px;
+}
+
+.calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, minmax(0, 1fr));
+    gap: 8px;
+    margin-top: 8px;
+}
+
+.calendar-weekday {
+    text-align: center;
+    font-size: 12px;
+    color: var(--muted-text);
+    padding: 6px 0;
+}
+
+.calendar-day {
+    border: 1px solid var(--border-color);
+    background: var(--card-color);
+    color: var(--text-color);
+    border-radius: 10px;
+    min-height: 72px;
+    padding: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+    cursor: pointer;
+}
+
+.calendar-day--empty {
+    border: none;
+    background: transparent;
+    cursor: default;
+}
+
+.calendar-day--today {
+    border-color: var(--primary-color);
+}
+
+.calendar-day--selected {
+    background: rgba(108, 99, 255, 0.18);
+}
+
+.calendar-day-number {
+    font-weight: 700;
+    font-size: 14px;
+}
+
+.calendar-day-badge {
+    font-size: 10px;
+    color: var(--primary-color);
+}
+
+.calendar-day-badge--muted {
+    color: var(--muted-text);
+}
+
+.calendar-task-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 12px;
+}
+
+.calendar-task-item {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    align-items: flex-start;
+    padding: 10px;
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    background: var(--card-color);
+}
+
+.calendar-task-meta {
+    display: block;
+    font-size: 12px;
+    color: var(--muted-text);
+    margin-top: 4px;
+}
+
+/* =========================
+   İSTATİSTİKLER
+========================= */
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 14px;
+    margin-bottom: 20px;
+}
+
+.stat-card {
+    background: var(--sidebar-color);
+    border: 1px solid var(--border-color);
+    border-radius: 14px;
+    padding: 16px;
+}
+
+.stat-card-label {
+    color: var(--muted-text);
+    font-size: 13px;
+    margin-bottom: 8px;
+}
+
+.stat-card-value {
+    font-size: 28px;
+    font-weight: 700;
+}
+
+.stat-card--todo .stat-card-value { color: var(--todo-color); }
+.stat-card--doing .stat-card-value { color: var(--doing-color); }
+.stat-card--done .stat-card-value { color: var(--done-color); }
+.stat-card--danger .stat-card-value { color: #ff8a8a; }
+.stat-card--primary .stat-card-value { color: var(--primary-color); }
+
+.stats-panel h2 {
+    font-size: 18px;
+    margin-bottom: 12px;
+}
+
+.stats-priority {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.stats-priority-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 13px;
+    margin-bottom: 6px;
+}
+
+.stats-bar {
+    height: 8px;
+    background: var(--card-color);
+    border-radius: 999px;
+    overflow: hidden;
+}
+
+.stats-bar span {
+    display: block;
+    height: 100%;
+    background: var(--primary-color);
+}
+
+/* =========================
+   AYARLAR
+========================= */
+
+.settings-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    max-width: 640px;
+}
+
+.settings-card h2 {
+    font-size: 18px;
+    margin-bottom: 12px;
+}
+
+.settings-dl {
+    display: grid;
+    grid-template-columns: 120px 1fr;
+    gap: 8px;
+    margin-bottom: 8px;
+}
+
+.settings-dl dt {
+    color: var(--muted-text);
+    font-size: 13px;
+}
+
+.settings-dl dd {
+    font-weight: 600;
+}
+
+.settings-card--soon {
+    border-style: dashed;
+}
+
+.soon-badge {
+    display: inline-block;
+    margin-bottom: 8px;
+    padding: 4px 10px;
+    border-radius: 999px;
+    background: rgba(108, 99, 255, 0.15);
+    color: var(--primary-color);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.4px;
+}
+
+.status-btn:focus-visible,
+.task-edit-btn:focus-visible,
+.ghost-btn:focus-visible,
+.text-btn:focus-visible,
+.danger-btn:focus-visible,
+.calendar-day:focus-visible,
+.retry-btn:focus-visible {
+    outline: 2px solid var(--primary-color);
+    outline-offset: 2px;
+}

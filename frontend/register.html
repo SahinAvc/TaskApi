@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Kayıt Ol - TaskApi</title>
+
+    <link
+        rel="stylesheet"
+        href="css/style.css"
+    >
+
+</head>
+
+
+<body class="auth-page">
+
+    <div class="auth-container">
+
+        <div class="auth-card">
+
+            <div class="auth-logo">
+                Task<span>Api</span>
+            </div>
+
+            <h1>Hesap oluştur</h1>
+
+            <p class="auth-description">
+                Görevlerini yönetmeye hemen başla.
+            </p>
+
+
+            <form id="register-form">
+
+                <div class="form-group">
+
+                    <label for="register-username">
+                        Kullanıcı adı
+                    </label>
+
+                    <input
+                        type="text"
+                        id="register-username"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="register-email">
+                        E-posta
+                    </label>
+
+                    <input
+                        type="email"
+                        id="register-email"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="register-password">
+                        Şifre
+                    </label>
+
+                    <input
+                        type="password"
+                        id="register-password"
+                        required
+                    >
+
+                </div>
+
+
+                <p
+                    id="register-error"
+                    class="form-error"
+                ></p>
+
+
+                <button
+                    type="submit"
+                    class="auth-button"
+                >
+                    Kayıt Ol
+                </button>
+
+            </form>
+
+
+            <p class="auth-footer">
+                Zaten hesabın var mı?
+                <a href="login.html">Giriş Yap</a>
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <script src="js/api.js"></script>
+    <script src="js/register.js"></script>
+
+</body>
+
+</html>
